@@ -5,7 +5,7 @@ import java.util.Set;
  * Created by martin on 5/8/17.
  */
 public class NewsLibrary {
-    private int id;
+    private String id;
     private Map<String,Set<News>> library;
     private Map<Integer,Privilege> privilegeManager;
     private String description;
@@ -19,11 +19,11 @@ public class NewsLibrary {
         this.organization = organization;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

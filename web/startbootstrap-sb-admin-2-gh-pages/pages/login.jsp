@@ -53,17 +53,19 @@
                 <div class="panel-body">
                     <form action="/servlet/loginprocess" method="get">
                         <fieldset>
-                            <div class="form-group has-error has-feedback">
-                                <input class="form-control" placeholder="Username" name="username" type="text"
-                                       <%if(request.getAttribute("username")!=null)
-                                       {%>
-                                            value=<%=request.getAttribute("username")%>
-                                       <%}%>
-                                               autofocus>
-                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password">                                >
+                            <%if(request.getAttribute("username")!=null)
+                            {%>
+                                <div class="form-group has-error has-feedback">
+                                    <input class="form-control" placeholder="Username" name="username" type="text" value=<%=request.getAttribute("username")%> autofocus>
+                                    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                </div>
+                            <%}else{%>
+                            <div class="form-group has-feedback">
+                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                            </div><%}%>
+
+                            <div class="form-group has-feedback">
+                                <input class="form-control" placeholder="Password" name="password" type="password"                                >
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -72,7 +74,7 @@
                             </div>
 
                             <c:if test="${MESSAGE=='incorrect_username_password'}">
-                                Incorrect_username
+                                Username or password is not correct
                             </c:if>
                             <%--<%=request.getAttribute("incorrect_username_password")%>--%>
                             <!-- Change this to a button or input when using this as a form -->

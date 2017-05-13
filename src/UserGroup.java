@@ -1,11 +1,11 @@
 import java.util.Set;
 
 /**
- * Created by martin on 5/8/17.
+ * Created by martin on 5/13/2017.
  */
-public class NewsSet {
+public class UserGroup {
     private String id;
-    private Set<News> mySet;
+    private Set<User> users;
     private String description;
 
     public String getDescription() {
@@ -24,11 +24,11 @@ public class NewsSet {
         this.id = id;
     }
 
-    public Set<News> getMySet() {
-        return mySet;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setMySet(Set<News> mySet) {
-        this.mySet = mySet;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

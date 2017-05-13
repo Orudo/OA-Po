@@ -25,14 +25,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="guava-21.0" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1" level="project" />
-    <orderEntry type="library" name="hibernate-release-5.2.10" level="project" />
-    <orderEntry type="library" name="javax.servlet-3.0.0.v201112011016" level="project" />
     <orderEntry type="library" name="Hibernate 5.2.9-5.2.9" level="project" />
-    <orderEntry type="library" name="hibernateUtil" level="project" />
     <orderEntry type="library" name="hsqldb-2.2.8" level="project" />
     <orderEntry type="library" name="hibernateUtil1" level="project" />
     <orderEntry type="library" name="taglibs-standard-impl-1.2.5" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.41-bin" level="project" />
+    <orderEntry type="library" name="javax.servlet-3.0.0.v201112011016" level="project" />
+    <orderEntry type="library" name="guava-21.0" level="project" />
   </component>
 </module>

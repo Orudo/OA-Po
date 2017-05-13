@@ -1,7 +1,7 @@
 <hibernate-mapping>
     <class name="DocumentLibrary" table="DOCUMENTLIBRARY">
         <id name="id" column="ID">
-            <generator class="increment"/>
+            <generator class="guid"/>
         </id>
         <property name="catagory" column="CATAGORY"/>
         <property name="capacity" column="CAPACITY"/>

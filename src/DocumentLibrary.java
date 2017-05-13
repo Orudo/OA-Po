@@ -5,7 +5,7 @@ import java.util.Set;
  * Created by martin on 5/7/17.
  */
 public class DocumentLibrary {
-    private int id;
+    private String id;
     private Organization organization;
     private String description;
     private String catagory;
@@ -14,11 +14,11 @@ public class DocumentLibrary {
     private Set<Document> documents;
     private HashMap<Integer,Privilege> privilegeManager;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

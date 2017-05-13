@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by martin on 5/7/17.
  */
 public class Announcement {
-    private int id;
+    private String id;
     private String Title;
     private Date begin,end,published_date;
     private Organization organization;
@@ -43,11 +43,11 @@ public class Announcement {
         this.organization = organization;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

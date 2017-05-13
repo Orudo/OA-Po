@@ -8,8 +8,7 @@ import java.util.Set;
  * Created by martin on 5/7/17.
  */
 public class News {
-    static
-    private int id;
+    private String id;
     private String title;
     private String category;
 
@@ -40,11 +39,11 @@ public class News {
         this.privileges = privileges;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,7 +1,7 @@
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
     <class name="NewsSet" table="NEWS_SET">
         <id name="id" column="ID">
-            <generator class="increment"/>
+            <generator class="guid"/>
         </id>
         <set name="mySet" cascade="all">
             <key column="SET_ID"/>

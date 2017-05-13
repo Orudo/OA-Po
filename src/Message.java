@@ -4,18 +4,20 @@ import java.util.Date;
  * Created by martin on 5/7/17.
  */
 public class Message {
-    private  int id;
+    private String id;
     private Date sentdate;
     private String sender;
     private String receiver;
     private boolean isread;
     private String filePath;
 
-    public int getId() {
+    public String getId() {
+
+
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

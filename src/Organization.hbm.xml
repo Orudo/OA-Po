@@ -1,7 +1,7 @@
 <hibernate-mapping>
     <class name="Organization" table="ORGANIZATION">
         <id name="id" column="ID">
-            <generator class="increment"></generator>
+            <generator class="guid"></generator>
         </id>
         <property name="code" column="CODE"/>
         <property name="faxNumber" column="FAXNUMBER"/>

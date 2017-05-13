@@ -1,10 +1,12 @@
 <hibernate-mapping>
-    <class name="Document" table="DOCUMENT">
+    <class name="UserGroup" table="USERGROUP">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>
-        <property name="filePath" column="FILEPATH"/>
         <property name="description" column="DESCRIPTION"/>
-        <property name="author" column="AUTHOR"/>
+        <set name="users" cascade="all">
+            <key colmun="GROUP_ID"/>
+            <one-to-many class="User"/>
+        </set>
     </class>
 </hibernate-mapping>

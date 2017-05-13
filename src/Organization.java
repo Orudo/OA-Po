@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by martin on 17-4-24.
  */
 public class Organization {
-    int id;
+    String id;
     String name;
     String Code;
     String Rank;
@@ -75,11 +75,11 @@ public class Organization {
         this.employees = employees;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

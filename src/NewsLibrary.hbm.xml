@@ -1,7 +1,7 @@
 <hibernate-mapping>
     <class name="NewsLibrary" table="NEWSLIBRARY">
         <id name="id" column="ID">
-            <generator class="increment"/>
+            <generator class="guid"/>
         </id>
         <property name="description" column="DESCRIPTION"/>
         <map name="library" cascade="all">

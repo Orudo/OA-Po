@@ -2,7 +2,7 @@
  * Created by martin on 5/7/17.
  */
 public class Document {
-    private int id;
+    private String id;
     private String filePath;
     private String description;
     private String author;
@@ -23,11 +23,11 @@ public class Document {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

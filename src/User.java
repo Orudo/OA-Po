@@ -11,7 +11,7 @@ import java.util.List;
  * Created by martin on 17-4-24.
  */
 public class User {
-    int id;
+    String id;
     String userName;
     String passwd;
 
@@ -37,11 +37,12 @@ public class User {
 
 
     }
-    public int getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

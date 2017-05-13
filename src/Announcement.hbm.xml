@@ -1,7 +1,7 @@
 <hibernate-mapping>
     <class name="Announcement" table="ANNOUNCEMENT">
         <id name="id" column="ID">
-            <generator class="increment"/>
+            <generator class="guid"/>
         </id>
         <many-to-one name="organization" column="ORGANIZATION_ID"/>
         <property name="filePath" column="FILEPATH"/>

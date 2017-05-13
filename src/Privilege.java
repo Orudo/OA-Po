@@ -4,19 +4,18 @@ import enums.Privileges;
  * Created by martin on 4/27/17.
  */
 public class Privilege {
-    private int id;
+    private String id;
     //public enum privilege{readonly,write,owned,delete}
     private enums.Privileges myPrivilege;
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
-
 
     public Privileges getMyPrivilege() {
         return myPrivilege;

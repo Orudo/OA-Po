@@ -2,14 +2,14 @@
  * Created by martin on 5/7/17.
  */
 public class Attachment {
-    int id;
+     String id;
     String filePath;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
