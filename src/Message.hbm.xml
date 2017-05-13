@@ -1,0 +1,12 @@
+<hibernate-mapping>
+    <class name="Message" table="MESSAGE">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <property name="filePath" column="FILEPATH"/>
+        <property name="isread" column="ISREAD"/>
+        <property name="receiver" column="RECEIVER"/>
+        <property name="sender" column="SENDER"/>
+        <property name="sentdate" column="SENTDATE"/>
+    </class>
+</hibernate-mapping>

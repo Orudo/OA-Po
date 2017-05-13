@@ -1,0 +1,29 @@
+<hibernate-mapping>
+    <class name="Announcement" table="ANNOUNCEMENT">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <many-to-one name="organization" column="ORGANIZATION_ID"/>
+        <property name="filePath" column="FILEPATH"/>
+        <property name="title" column="TITLE"/>
+        <property name="begin" column="BEGIN_DATE"/>
+        <property name="end" column="END_DATE"/>
+        <property name="published_date" column="PUBLISHED_DATE"/>
+        <property name="status" column="STATUS">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">enums.AnnouncementStatuses</param>
+
+            </type>
+        </property>
+        <property name="description" column="DESCRIPTION"/>
+        <set name="attachments" cascade="all">
+            <key column="ANNOUNCEMENT_ID"/>
+            <one-to-many class="Attachment"/>
+        </set>
+        <map name="privilegeManager" cascade="all">
+            <key column="ANNOUNCEMENT_ID"/>
+            <map-key type="int" column="ADMIN_ID"/>
+            <one-to-many class="Privilege"/>
+        </map>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+<hibernate-mapping>
+    <class name="Attachment" table="ATTACHMENT">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <property name="filePath" column="FILEPATH"/>
+    </class>
+</hibernate-mapping>

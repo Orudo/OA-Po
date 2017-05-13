@@ -1,0 +1,41 @@
+<hibernate-mapping>
+    <class name="Organization" table="ORGANIZATION">
+        <id name="id" column="ID">
+            <generator class="increment"></generator>
+        </id>
+        <property name="code" column="CODE"/>
+        <property name="faxNumber" column="FAXNUMBER"/>
+        <property name="name" column="NAME"/>
+        <property name="inceptionDate" column="INCEPTIONDATE"/>
+        <property name="leader" column="LEADER"/>
+        <property name="rank" column="RANK"/>
+        <property name="registerFund" column="REGISTERFUND"/>
+        <set name="subOrganizations" cascade="all" >
+            <key column="ORGANIZATION_ID"></key>
+            <one-to-many class="Organization"></one-to-many>
+        </set>
+        <many-to-one name="parentOrganization" column="ORGANIZATION_ID" class="Organization"></many-to-one>
+        <set name="employees" cascade="all" >
+            <key column="ORGANIZATION_ID"/>
+            <one-to-many class="Employee"/>
+        </set>
+        <set name="newsLibraries" cascade="all">
+            <key column="ORGANIZATION_ID"/>
+            <one-to-many class="News"/>
+        </set>
+        <set name="documentLibraries" cascade="all">
+            <key column="ORGANIZATION_ID"/>
+            <one-to-many class="DocumentLibrary"/>
+        </set>
+        <set name="announcements" cascade="all">
+            <key column="ORGANIZATION_ID"/>
+            <one-to-many class="Announcement"/>
+        </set>
+
+        <map name="privilegeManager" cascade="all">
+            <key column="ORGANIZATION_ID"/>
+            <map-key type="int" column="ADMIN_ID"/>
+            <one-to-many class="Privilege"/>
+        </map>
+    </class>
+</hibernate-mapping>

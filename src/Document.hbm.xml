@@ -1,0 +1,10 @@
+<hibernate-mapping>
+    <class name="Document" table="DOCUMENT">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <property name="filePath" column="FILEPATH"/>
+        <property name="description" column="DESCRIPTION"/>
+        <property name="author" column="AUTHOR"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<hibernate-mapping>
+    <class name="NewsLibrary" table="NEWSLIBRARY">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <property name="description" column="DESCRIPTION"/>
+        <map name="library" cascade="all">
+            <key column="NEWSLIBRARY_ID"/>
+            <map-key type="java.lang.String" column="CATE_NAME"/>
+            <one-to-many class="NewsSet"/>
+        </map>
+        <map name="privilegeManager" cascade="all">
+            <key column="NEWSLIBRARY_ID"/>
+            <map-key type="int" column="ADMIN_ID"/>
+            <one-to-many class="Privilege"/>
+        </map>
+        <many-to-one name="organization" column="ORGANIZATION_ID"/>
+    </class>
+</hibernate-mapping>

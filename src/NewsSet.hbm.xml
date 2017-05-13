@@ -1,0 +1,12 @@
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="NewsSet" table="NEWS_SET">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <set name="mySet" cascade="all">
+            <key column="SET_ID"/>
+            <one-to-many class="News"/>
+        </set>
+        <property name="description" column="DESCRIPTION"/>
+    </class>
+</hibernate-mapping>

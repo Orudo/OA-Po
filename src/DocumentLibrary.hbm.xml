@@ -1,0 +1,21 @@
+<hibernate-mapping>
+    <class name="DocumentLibrary" table="DOCUMENTLIBRARY">
+        <id name="id" column="ID">
+            <generator class="increment"/>
+        </id>
+        <property name="catagory" column="CATAGORY"/>
+        <property name="capacity" column="CAPACITY"/>
+        <property name="description" column="DESCRIPTION"/>
+        <many-to-one name="organization" column="ORGANIZATION_ID" class="Organization"/>
+        <property name="max_limit" column="MAXLIMIT"/>
+        <map name="privilegeManager" cascade="all">
+            <key column="DOCUMENT_LIBRARY_ID"/>
+            <map-key type="int" column="ADMIN_ID"/>
+            <one-to-many class="Privilege"/>
+        </map>
+        <set name="documents" cascade="all">
+            <key column="DOCUMENT_LIBRARY_ID"/>
+            <one-to-many class="Document"/>
+        </set>
+    </class>
+</hibernate-mapping>

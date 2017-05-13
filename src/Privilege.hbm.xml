@@ -1,0 +1,13 @@
+<hibernate-mapping>
+    <class name="Privilege" table="PRIVILEGE">
+        <id name="id" column="ID">
+            <generator class="increment"></generator>
+        </id>
+        <property name="myPrivilege" column="MYPRIVILEGE">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">enums.Privileges</param>
+
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>
