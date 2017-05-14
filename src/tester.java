@@ -1,12 +1,12 @@
 import com.google.common.hash.Hashing;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import entity.Message;
+import entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
 
 /**
  * Created by martin on 5/1/17.
@@ -15,7 +15,7 @@ public class tester {
     private static SessionFactory factory;
     public static void main(String[] args)
     {
-        /*factory=new  Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        factory=new  Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
 
         Session session=factory.openSession();
@@ -23,11 +23,9 @@ public class tester {
 
 
 
-        Employee e1=new Employee();
-        e1.setDepartment("dep a");
-        e1.setEmail("1@qq.oo");
-        e1.setUserName("admin");
-        e1.setPasswd(Hashing.sha256().hashString("damnit", StandardCharsets.UTF_8).toString());*/
+        User e1=new User();
+        e1.setUserName("charlie");
+        e1.setPasswd(Hashing.sha256().hashString("damnit", StandardCharsets.UTF_8).toString());
 
         /*Employee e2=new Employee();
         e2.setName("pp");
@@ -117,14 +115,17 @@ public class tester {
 
 
 
+        /*Message message=new Message();
+        message.setReceiver("admin");
+        message.setFilePath("damnit");*/
 
-        /*session.persist(e1);
+        session.persist(e1);
         //session.persist(message);
         System.out.println("o1 process finished");
         t.commit();
         session.close();
 
-        System.out.print("success");*/
+        System.out.print("success");
         User user=User.getUser("admin");
         System.out.println(user.toString());
 

@@ -7,10 +7,35 @@
         <servlet-name>login</servlet-name>
         <servlet-class>LoginProcess</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendMessage</servlet-name>
+        <servlet-class>SendMessage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getMessageInbox</servlet-name>
+        <servlet-class>GetInbox</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMessageDetail</servlet-name>
+        <servlet-class>GetMessageDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
         <url-pattern>/servlet/loginprocess</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMessage</servlet-name>
+        <url-pattern>/servlet/SendMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMessageDetail</servlet-name>
+        <url-pattern>/servlet/getMessageDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getMessageInbox</servlet-name>
+        <url-pattern>/servlet/getMessage</url-pattern>
+    </servlet-mapping>
+
     <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/hibernate_test</res-ref-name>

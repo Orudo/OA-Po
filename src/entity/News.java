@@ -1,3 +1,5 @@
+package entity;
+
 import enums.NewsStatuses;
 
 import java.util.Date;

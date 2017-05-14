@@ -1,3 +1,5 @@
+package entity;
+
 import enums.AnnouncementStatuses;
 
 import java.util.Date;

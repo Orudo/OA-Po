@@ -1,13 +1,13 @@
 <hibernate-mapping>
-    <class name="User" table="USER">
+    <class name="entity.User" table="USER">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>
         <property name="userName" column="USERNAME"/>
         <property name="passwd" column="PASSWD"/>
-        <joined-subclass name="Employee" table="EMPLOYEE">
+        <joined-subclass name="entity.Employee" table="EMPLOYEE">
             <key column="USER_ID"/>
-            <many-to-one name="organization" column="ORGANIZATION" class="Organization"/>
+            <many-to-one name="organization" column="ORGANIZATION" class="entity.Organization"/>
             <property name="name" column="NAME"/>
             <property name="department" column="DEPARTMENT"/>
             <property name="email" column="EMAIL"/>

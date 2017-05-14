@@ -2,12 +2,25 @@
 <html lang="en">
 
 <head>
+    <style>
+        .table {
+            table-layout:fixed;
+        }
+
+        .table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <script src="../vendor/jquery/jquery-3.2.1.js" type="text/javascript"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
@@ -400,7 +413,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX">
+                                    <tr class="clickable-row">
                                         <td>Trident</td>
                                         <td>Internet Explorer 4.0</td>
                                         <td>Win 95+</td>
@@ -442,7 +455,7 @@
                                         <td class="center">6</td>
                                         <td class="center">A</td>
                                     </tr>
-                                    <tr class="gradeA">
+                                    <tr class="clickable-row">
                                         <td>Gecko</td>
                                         <td>Firefox 1.0</td>
                                         <td>Win 98+ / OSX.2+</td>
@@ -1114,10 +1127,10 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
@@ -1135,7 +1148,12 @@
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
             responsive: true
-            searching : false
+        });
+    });
+    jQuery(document).ready(function(){ alert("Hello"); })
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.document.location = $(this).data("href");
         });
     });
     </script>

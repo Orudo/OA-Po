@@ -1,11 +1,13 @@
+package entity;
+
 import java.util.Set;
 
 /**
- * Created by martin on 5/13/2017.
+ * Created by martin on 5/8/17.
  */
-public class UserGroup {
+public class NewsSet {
     private String id;
-    private Set<User> users;
+    private Set<News> mySet;
     private String description;
 
     public String getDescription() {
@@ -24,11 +26,11 @@ public class UserGroup {
         this.id = id;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<News> getMySet() {
+        return mySet;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setMySet(Set<News> mySet) {
+        this.mySet = mySet;
     }
 }

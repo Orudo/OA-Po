@@ -1,10 +1,8 @@
 <hibernate-mapping>
-    <class name="Document" table="DOCUMENT">
+    <class name="entity.Attachment" table="ATTACHMENT">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>
         <property name="filePath" column="FILEPATH"/>
-        <property name="description" column="DESCRIPTION"/>
-        <property name="author" column="AUTHOR"/>
     </class>
 </hibernate-mapping>

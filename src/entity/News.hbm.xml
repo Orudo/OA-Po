@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="News" table="NEWS">
+    <class name="entity.News" table="NEWS">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>
@@ -15,12 +15,12 @@
         </property>
         <set name="attachments" cascade="all">
             <key column="NEWS_ID"/>
-            <one-to-many class="Attachment"/>
+            <one-to-many class="entity.Attachment"/>
         </set>
         <map name="privileges" cascade="all">
             <key column="NEWS_ID"/>
             <map-key type="int" column="ADMIN_ID"/>
-            <one-to-many class="Privilege"/>
+            <one-to-many class="entity.Privilege"/>
         </map>
     </class>
 </hibernate-mapping>

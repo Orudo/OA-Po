@@ -23,15 +23,15 @@
         </property>
 
         <!-- List of XML mapping files -->
-        <mapping resource="User.hbm.xml"/>
-        <mapping resource="Organization.hbm.xml"/>
-        <mapping resource="Privilege.hbm.xml"/>
-        <mapping resource="News.hbm.xml"/>
-        <mapping resource="Attachment.hbm.xml"/>
-        <mapping resource="Document.hbm.xml"/>
-        <mapping resource="DocumentLibrary.hbm.xml"/>
-        <mapping resource="Announcement.hbm.xml"/>
-        <mapping resource="Message.hbm.xml"/>
+        <mapping resource="entity/User.hbm.xml"/>
+        <mapping resource="entity/Organization.hbm.xml"/>
+        <mapping resource="entity/Privilege.hbm.xml"/>
+        <mapping resource="entity/News.hbm.xml"/>
+        <mapping resource="entity/Attachment.hbm.xml"/>
+        <mapping resource="entity/Document.hbm.xml"/>
+        <mapping resource="entity/DocumentLibrary.hbm.xml"/>
+        <mapping resource="entity/Announcement.hbm.xml"/>
+        <mapping resource="entity/Message.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

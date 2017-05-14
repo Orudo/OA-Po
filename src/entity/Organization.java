@@ -1,4 +1,5 @@
-import javax.print.Doc;
+package entity;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;

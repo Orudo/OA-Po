@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="Privilege" table="PRIVILEGE">
+    <class name="entity.Privilege" table="PRIVILEGE">
         <id name="id" column="ID">
             <generator class="guid"></generator>
         </id>

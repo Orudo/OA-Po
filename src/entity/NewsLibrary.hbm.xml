@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="NewsLibrary" table="NEWSLIBRARY">
+    <class name="entity.NewsLibrary" table="NEWSLIBRARY">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>
@@ -7,12 +7,12 @@
         <map name="library" cascade="all">
             <key column="NEWSLIBRARY_ID"/>
             <map-key type="java.lang.String" column="CATE_NAME"/>
-            <one-to-many class="NewsSet"/>
+            <one-to-many class="entity.NewsSet"/>
         </map>
         <map name="privilegeManager" cascade="all">
             <key column="NEWSLIBRARY_ID"/>
             <map-key type="int" column="ADMIN_ID"/>
-            <one-to-many class="Privilege"/>
+            <one-to-many class="entity.Privilege"/>
         </map>
         <many-to-one name="organization" column="ORGANIZATION_ID"/>
     </class>

@@ -1,12 +1,12 @@
 <hibernate-mapping>
-    <class name="UserGroup" table="USERGROUP">
+    <class name="entity.UserGroup" table="USERGROUP">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>
         <property name="description" column="DESCRIPTION"/>
         <set name="users" cascade="all">
             <key colmun="GROUP_ID"/>
-            <one-to-many class="User"/>
+            <one-to-many class="entity.User"/>
         </set>
     </class>
 </hibernate-mapping>

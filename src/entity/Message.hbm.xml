@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="Message" table="MESSAGE">
+    <class name="entity.Message" table="MESSAGE">
         <id name="id" column="ID">
             <generator class="guid"/>
         </id>

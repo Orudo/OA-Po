@@ -1,3 +1,5 @@
+package entity;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -19,13 +21,12 @@ public class User {
     public static User getUser(String userName)
     {
 
-        Session session = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
 
         Query query=session.createQuery("from User where userName = '" +userName+"'");
 
         List<User> users=query.list();
 
-        System.out.println(users.toArray());
 
         Transaction t=session.beginTransaction();
         t.commit();
@@ -34,8 +35,22 @@ public class User {
         Iterator<User> iter=users.iterator();
         if(iter.hasNext()) return iter.next();
         else return null;
+    }
+    public static User getUserById(String id)
+    {
+        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
 
+        Query query=session.createQuery("from User where id = '" +id+"'");
 
+        List<User> users=query.list();
+
+        Transaction t=session.beginTransaction();
+        t.commit();
+        session.close();
+
+        Iterator<User> iter=users.iterator();
+        if(iter.hasNext()) return iter.next();
+        else return null;
     }
 
     public String getId() {
