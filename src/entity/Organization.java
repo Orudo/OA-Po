@@ -1,8 +1,11 @@
 package entity;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import java.util.*;
 
 /**
  * Created by martin on 17-4-24.
@@ -16,13 +19,69 @@ public class Organization {
     float registerFund;
     String leader;
     String faxNumber;
-    Map<Integer,Privilege> privilegeManager;
+    Map<Integer, Privilege> privilegeManager;
     Set<Employee> employees;
     Set<Organization> subOrganizations;
     Set<NewsLibrary> newsLibraries;
     Set<DocumentLibrary> documentLibraries;
     Set<Announcement> announcements;
+    private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
+    public static void addOrganization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber) {
+        Session session = factory.getCurrentSession();
+        Organization organization = new Organization();
+        organization.setName(name);
+        organization.setCode(Code);
+        organization.setRank(Rank);
+        organization.setInceptionDate(new Date());
+        organization.setLeader(leader);
+        organization.setFaxNumber(faxNumber);
+        organization.setPrivilegeManager(new HashMap<Integer, Privilege>());
+        organization.setEmployees(new HashSet<Employee>());
+        organization.setNewsLibraries(new HashSet<NewsLibrary>());
+        organization.setDocumentLibraries(new HashSet<DocumentLibrary>());
+        organization.setAnnouncements(new HashSet<Announcement>());
+
+        session.beginTransaction();
+        session.persist(organization);
+        session.getTransaction().commit();
+
+    }
+
+    public void AttachEmployee(Employee employee) {
+        this.employees.add(employee);
+    }
+
+    public void AttachNewsLibrary(NewsLibrary lib) {
+        newsLibraries.add(lib);
+    }
+
+    public void AttachDocumentLibrary(DocumentLibrary lib) {
+        documentLibraries.add(lib);
+    }
+    public void AttachAnnouncement(Announcement announcement)
+    {
+        announcements.add(announcement);
+    }
+
+    public void DeatchEmployee(Employee employee){employees.remove(employee);}
+    public void DeatchNewsLibrary(NewsLibrary lib) {
+        newsLibraries.remove(lib);
+    }
+
+    public void DeatchDocumentLibrary(DocumentLibrary lib) {
+        documentLibraries.remove(lib);
+    }
+    public void DeatchAnnouncement(Announcement announcement) {
+        announcements.remove(announcement);
+    }
+    public void UpdateMyself()
+    {
+        Session session=factory.getCurrentSession();
+        session.beginTransaction();
+        session.update(this);
+        session.getTransaction().commit();
+    }
 
     public Set<NewsLibrary> getNewsLibraries() {
         return newsLibraries;

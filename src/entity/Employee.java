@@ -93,6 +93,13 @@ public class Employee extends User {
         session.update(employee);
         session.getTransaction().commit();
     }
+    public void UpdateMyself()
+    {
+        Session session=factory.getCurrentSession();
+        session.beginTransaction();
+        session.update(this);
+        session.getTransaction().commit();
+    }
 
     public Organization getOrganization() {
         return organization;
