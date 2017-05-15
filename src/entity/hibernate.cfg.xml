@@ -21,6 +21,9 @@
         <property name="hibernate.connection.password">
             cjj8120972
         </property>
+        <property name="hibernate.current_session_context_class">
+            thread
+        </property>
 
         <!-- List of XML mapping files -->
         <mapping resource="entity/User.hbm.xml"/>
