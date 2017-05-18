@@ -27,7 +27,7 @@ public class Organization {
     Set<Announcement> announcements;
     private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
-    public static void addOrganization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber) {
+    public static Organization addOrganization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber) {
         Session session = factory.getCurrentSession();
         Organization organization = new Organization();
         organization.setName(name);
@@ -36,6 +36,7 @@ public class Organization {
         organization.setInceptionDate(new Date());
         organization.setLeader(leader);
         organization.setFaxNumber(faxNumber);
+        organization.setSubOrganizations(new HashSet<Organization>());
         organization.setPrivilegeManager(new HashMap<Integer, Privilege>());
         organization.setEmployees(new HashSet<Employee>());
         organization.setNewsLibraries(new HashSet<NewsLibrary>());
@@ -45,6 +46,7 @@ public class Organization {
         session.beginTransaction();
         session.persist(organization);
         session.getTransaction().commit();
+        return organization;
 
     }
 
@@ -63,6 +65,7 @@ public class Organization {
     {
         announcements.add(announcement);
     }
+    public void AttachSubOrganization(Organization organization){subOrganizations.add(organization);}
 
     public void DeatchEmployee(Employee employee){employees.remove(employee);}
     public void DeatchNewsLibrary(NewsLibrary lib) {
@@ -75,11 +78,22 @@ public class Organization {
     public void DeatchAnnouncement(Announcement announcement) {
         announcements.remove(announcement);
     }
+    public void DetachSubOrganization(Organization organization)
+    {
+        subOrganizations.remove(organization);
+    }
     public void UpdateMyself()
     {
         Session session=factory.getCurrentSession();
         session.beginTransaction();
         session.update(this);
+        session.getTransaction().commit();
+    }
+    public void DeleteMyself()
+    {
+        Session session=factory.getCurrentSession();
+        session.beginTransaction();
+        session.delete(this);
         session.getTransaction().commit();
     }
 

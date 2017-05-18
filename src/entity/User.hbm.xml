@@ -7,7 +7,7 @@
         <property name="passwd" column="PASSWD"/>
         <joined-subclass name="entity.Employee" table="EMPLOYEE">
             <key column="USER_ID"/>
-            <many-to-one name="organization" column="ORGANIZATION" class="entity.Organization"/>
+            <many-to-one name="organization" column="ORGANIZATION_ID" class="entity.Organization"/>
             <property name="name" column="NAME"/>
             <property name="department" column="DEPARTMENT"/>
             <property name="email" column="EMAIL"/>

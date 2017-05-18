@@ -36,22 +36,20 @@ public class Employee extends User {
     public static void addEmployee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
         Session session = factory.openSession();
         Transaction t=session.beginTransaction();
-
-        Employee employee=new Employee();
-        employee.setUserName(userName);
-        employee.setPasswd(passwd);
-        employee.setName(name);
-        employee.setDepartment(department);
-        employee.setTitle(title);
-        employee.setPhone(phone);
-        employee.setLandlinePhone(landlinePhone);
-        employee.setEmail(email);
-        employee.setPhotoPath(photoPath);
-
-
-        session.persist(employee);
+        session.persist(new Employee(userName,passwd,name,department,title,phone,landlinePhone,email,photoPath));
         t.commit();
         session.close();
+    }
+    public Employee(){}
+    public Employee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
+        super(userName,passwd);
+        this.Name=name;
+        this.department=department;
+        this.title=title;
+        this.phone=phone;
+        this.landlinePhone=landlinePhone;
+        this.email=email;
+        this.photoPath=photoPath;
     }
 
     public static Employee GetEmployeeById(String id)
@@ -67,6 +65,29 @@ public class Employee extends User {
         {
             return users.iterator().next();
         }else return null;
+    }
+    public void AttachToOrganization(Organization organization,boolean isSetOrganization)
+    {
+        this.organization=organization;
+        if(isSetOrganization){
+            organization.getEmployees().add(this);
+        }
+    }
+    public static Employee getEmployeeByName(String userName)
+    {
+        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
+
+        Query query=session.createQuery("from User where userName = '" +userName+"'");
+
+        List<Employee> users=query.list();
+
+        Transaction t=session.beginTransaction();
+        t.commit();
+        session.close();
+
+        Iterator<Employee> iter=users.iterator();
+        if(iter.hasNext()) return iter.next();
+        else return null;
     }
 
 

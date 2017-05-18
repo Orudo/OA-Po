@@ -1,5 +1,7 @@
 import com.google.common.hash.Hashing;
+import entity.Employee;
 import entity.Message;
+import entity.Organization;
 import entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,17 +17,7 @@ public class tester {
     private static SessionFactory factory;
     public static void main(String[] args)
     {
-        factory=new  Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
-
-        Session session=factory.openSession();
-        Transaction t=session.beginTransaction();
-
-
-
-        User e1=new User();
-        e1.setUserName("charlie");
-        e1.setPasswd(Hashing.sha256().hashString("damnit", StandardCharsets.UTF_8).toString());
 
         /*Employee e2=new Employee();
         e2.setName("pp");
@@ -119,15 +111,15 @@ public class tester {
         message.setReceiver("admin");
         message.setFilePath("damnit");*/
 
-        session.persist(e1);
-        //session.persist(message);
-        System.out.println("o1 process finished");
-        t.commit();
-        session.close();
+        //Employee.addEmployee("martin","123456","martin","damnit","master","131-0000-0000","192,--0029","a@qq.com","//");
+        Organization organization=Organization.addOrganization("damnit","123-321","no rank",(float)321.4,"i","1230-3210");
+        System.out.println(organization);
+        Employee employee=Employee.getEmployeeByName("martin");
+        System.out.println(employee);
+        employee.AttachToOrganization(organization,true);
+        employee.UpdateMyself();
+        organization.UpdateMyself();
 
-        System.out.print("success");
-        User user=User.getUser("admin");
-        System.out.println(user.toString());
 
 
     }
