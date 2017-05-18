@@ -15,8 +15,8 @@ public class News {
     private String category;
 
     private String filePath;
-    private int publisher;
-    private int auditor;
+    private String publisher;
+    private String auditor;
     private Date publishDate;
     private Date lastUpdate;
     //private Organization organization;
@@ -73,21 +73,6 @@ public class News {
         this.filePath = filePath;
     }
 
-    public int getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(int publisher) {
-        this.publisher = publisher;
-    }
-
-    public int getAuditor() {
-        return auditor;
-    }
-
-    public void setAuditor(int auditor) {
-        this.auditor = auditor;
-    }
 
     public Date getPublishDate() {
         return publishDate;

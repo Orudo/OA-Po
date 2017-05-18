@@ -35,6 +35,7 @@ public class User {
         Transaction t=session.beginTransaction();
         t.commit();
         session.close();
+        System.out.println("Users list get");
 
         Iterator<User> iter=users.iterator();
         if(iter.hasNext()) return iter.next();

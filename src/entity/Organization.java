@@ -26,28 +26,27 @@ public class Organization {
     Set<DocumentLibrary> documentLibraries;
     Set<Announcement> announcements;
     private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
-
+    public Organization(){}
+    public Organization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber){
+        this.name=name;
+        this.Code=Code;
+        this.Rank=Rank;
+        this.registerFund=registerFund;
+        this.leader=leader;
+        this.faxNumber=faxNumber;
+        privilegeManager=new  HashMap<Integer, Privilege>();
+        employees=new HashSet<Employee>();
+        newsLibraries=new HashSet<NewsLibrary>();
+        documentLibraries=new HashSet<DocumentLibrary>();
+        announcements=new  HashSet<Announcement>();
+    }
     public static Organization addOrganization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber) {
         Session session = factory.getCurrentSession();
-        Organization organization = new Organization();
-        organization.setName(name);
-        organization.setCode(Code);
-        organization.setRank(Rank);
-        organization.setInceptionDate(new Date());
-        organization.setLeader(leader);
-        organization.setFaxNumber(faxNumber);
-        organization.setSubOrganizations(new HashSet<Organization>());
-        organization.setPrivilegeManager(new HashMap<Integer, Privilege>());
-        organization.setEmployees(new HashSet<Employee>());
-        organization.setNewsLibraries(new HashSet<NewsLibrary>());
-        organization.setDocumentLibraries(new HashSet<DocumentLibrary>());
-        organization.setAnnouncements(new HashSet<Announcement>());
-
+        Organization organization = new Organization(name,Code,Rank,registerFund,leader,faxNumber);
         session.beginTransaction();
         session.persist(organization);
         session.getTransaction().commit();
         return organization;
-
     }
 
     public void AttachEmployee(Employee employee) {
@@ -65,7 +64,6 @@ public class Organization {
     {
         announcements.add(announcement);
     }
-    public void AttachSubOrganization(Organization organization){subOrganizations.add(organization);}
 
     public void DeatchEmployee(Employee employee){employees.remove(employee);}
     public void DeatchNewsLibrary(NewsLibrary lib) {
@@ -78,22 +76,11 @@ public class Organization {
     public void DeatchAnnouncement(Announcement announcement) {
         announcements.remove(announcement);
     }
-    public void DetachSubOrganization(Organization organization)
-    {
-        subOrganizations.remove(organization);
-    }
     public void UpdateMyself()
     {
         Session session=factory.getCurrentSession();
         session.beginTransaction();
         session.update(this);
-        session.getTransaction().commit();
-    }
-    public void DeleteMyself()
-    {
-        Session session=factory.getCurrentSession();
-        session.beginTransaction();
-        session.delete(this);
         session.getTransaction().commit();
     }
 

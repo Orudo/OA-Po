@@ -1,30 +1,14 @@
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
-<%@ page import="entity.Message" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <style>
-        .table {
-            table-layout:fixed;
-        }
-
-        .table td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    </style>
-    <script src="/startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
@@ -33,12 +17,6 @@
 
     <!-- MetisMenu CSS -->
     <link href="/startbootstrap-sb-admin-2-gh-pages/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="/startbootstrap-sb-admin-2-gh-pages/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="/startbootstrap-sb-admin-2-gh-pages/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="/startbootstrap-sb-admin-2-gh-pages/dist/css/sb-admin-2.css" rel="stylesheet">
@@ -393,7 +371,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Tables</h1>
+                <h1 class="page-header">Typography</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -402,46 +380,168 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        DataTables Advanced Tables
+                        Headings
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                            <tr>
-                                <th >Sender</th>
-                                <th >Date</th>
-                                <th >Content</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${messageLists}" var="message">
-                                <tr class="clickable-row" data-href="/servlet/getMessageDetail?messageid=${message.getId()}">
-                                    <td><c:out value="${message.getSender()}"/> </td>
-                                    <td><c:out value="${message.getSentdate()}"/></td>
-                                    <td ><c:out value="${message.getFilePath()}"/></td>
-                                </tr>
-                            </c:forEach>
-
-                            </tbody>
-                        </table>
-                        <div>
-                            <button type="button" class="btn btn-default btn-danger jump" data-href="/startbootstrap-sb-admin-2-gh-pages/pages/ComposeMessage.jsp">Compose
-                            </button>
-                        </div>
-                        <!-- /.table-responsive -->
-                        <div class="well">
-                            <h4>DataTables Usage Information</h4>
-                            <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images. For complete documentation on DataTables, visit their website at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.</p>
-                            <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
-                        </div>
+                        <h3>Sender:
+                            <small><c:out value="${Message.getSender()}"/></small>
+                        </h3>
+                        <h3>Date:
+                            <small><c:out value="${Message.getSentdate()}"/></small>
+                        </h3>
+                        <h2>Content:</h2>
+                        <p><c:out value="${Message.getFilePath()}"/></p>
                     </div>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
             </div>
             <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Abbreviations
+                    </div>
+                    <div class="panel-body">
+                        <p>The abbreviation of the word attribute is
+                            <abbr title="attribute">attr</abbr>.</p>
+                        <p>
+                            <abbr title="HyperText Markup Language" class="initialism">HTML</abbr>is an abbreviation for a programming language.</p>
+                        <br>
+                        <h4>Addresses</h4>
+                        <address>
+                            <strong>Twitter, Inc.</strong>
+                            <br>795 Folsom Ave, Suite 600
+                            <br>San Francisco, CA 94107
+                            <br>
+                            <abbr title="Phone">P:</abbr>(123) 456-7890
+                        </address>
+                        <address>
+                            <strong>Full Name</strong>
+                            <br>
+                            <a href="mailto:#">first.last@example.com</a>
+                        </address>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Blockquotes
+                    </div>
+                    <div class="panel-body">
+                        <h4>Default Blockquote</h4>
+                        <blockquote>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        </blockquote>
+                        <h4>Blockquote with Citation</h4>
+                        <blockquote>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <small>Someone famous in
+                                <cite title="Source Title">Source Title</cite>
+                            </small>
+                        </blockquote>
+                        <h4>Right Aligned Blockquote</h4>
+                        <blockquote class="pull-right">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        </blockquote>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Lists
+                    </div>
+                    <div class="panel-body">
+                        <h4>Unordered List</h4>
+                        <ul>
+                            <li>List Item</li>
+                            <li>List Item</li>
+                            <li>
+                                <ul>
+                                    <li>List Item</li>
+                                    <li>List Item</li>
+                                    <li>List Item</li>
+                                </ul>
+                            </li>
+                            <li>List Item</li>
+                        </ul>
+                        <h4>Ordered List</h4>
+                        <ol>
+                            <li>List Item</li>
+                            <li>List Item</li>
+                            <li>List Item</li>
+                        </ol>
+                        <h4>Unstyled List</h4>
+                        <ul class="list-unstyled">
+                            <li>List Item</li>
+                            <li>List Item</li>
+                            <li>List Item</li>
+                        </ul>
+                        <h4>Inline List</h4>
+                        <ul class="list-inline">
+                            <li>List Item</li>
+                            <li>List Item</li>
+                            <li>List Item</li>
+                        </ul>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Description Lists
+                    </div>
+                    <div class="panel-body">
+                        <dl>
+                            <dt>Standard Description List</dt>
+                            <dd>Description Text</dd>
+                            <dt>Description List Title</dt>
+                            <dd>Description List Text</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>Horizontal Description List</dt>
+                            <dd>Description Text</dd>
+                            <dt>Description List Title</dt>
+                            <dd>Description List Text</dd>
+                        </dl>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Code
+                    </div>
+                    <div class="panel-body">
+                        <p>This is an example of an inline code element within body copy. Wrap inline code within a
+                            <code>&lt;code&gt;...&lt;/code&gt;</code>tag.</p>
+                        <pre>This is an example of preformatted text.</pre>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
         </div>
         <!-- /.row -->
     </div>
@@ -451,41 +551,16 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-
+<script src="/startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-
+<script src="/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/startbootstrap-sb-admin-2-gh-pages/vendor/metisMenu/metisMenu.min.js"></script>
 
-<!-- DataTables JavaScript -->
-<script src="/startbootstrap-sb-admin-2-gh-pages/vendor/datatables/js/jquery.dataTables.min.js"></script>
-<script src="/startbootstrap-sb-admin-2-gh-pages/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-<script src="/startbootstrap-sb-admin-2-gh-pages/vendor/datatables-responsive/dataTables.responsive.js"></script>
-
 <!-- Custom Theme JavaScript -->
 <script src="/startbootstrap-sb-admin-2-gh-pages/dist/js/sb-admin-2.js"></script>
-
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
-    jQuery(document).ready(function(){ alert("Hello"); })
-    jQuery(document).ready(function($) {
-        $(".clickable-row").click(function() {
-            window.document.location = $(this).data("href");
-        });
-    });
-    jQuery(document).ready(function($) {
-        $(".jump").click(function() {
-            window.document.location = $(this).data("href");
-        });
-    });
-</script>
 
 </body>
 
