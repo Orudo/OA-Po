@@ -16,6 +16,23 @@ public class News {
 
     private String filePath;
     private String publisher;
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(String auditor) {
+        this.auditor = auditor;
+    }
+
     private String auditor;
     private Date publishDate;
     private Date lastUpdate;

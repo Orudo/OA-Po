@@ -390,7 +390,7 @@
         <!-- /.navbar-static-side -->
     </nav>
 
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
 
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -498,7 +498,7 @@
             <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
-    </nav>
+
 
     <div id="page-wrapper">
         <div class="row">
