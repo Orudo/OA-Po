@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.*;
 
@@ -26,6 +27,9 @@ public class Organization {
     Set<DocumentLibrary> documentLibraries;
     Set<Announcement> announcements;
     private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
+
+
+
     public Organization(){}
     public Organization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber){
         this.name=name;
@@ -48,7 +52,23 @@ public class Organization {
         session.getTransaction().commit();
         return organization;
     }
+    public static List<Organization> findOrganizationByParentId(String id)
+    {
+        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
+        Query query;
+        if(id.equals(null))
+        {
+            query=session.createQuery("from Organization where parentOrganization = null ");
+        }else query=session.createQuery("from Organization where parentOrganization = '"+id+"' ");
 
+        List<Organization> organizations=query.list();
+
+        Transaction t=session.beginTransaction();
+        t.commit();
+        session.close();
+
+        return organizations;
+    }
     public void AttachEmployee(Employee employee) {
         this.employees.add(employee);
     }

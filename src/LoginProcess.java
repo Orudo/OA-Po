@@ -24,7 +24,7 @@ public class LoginProcess extends HttpServlet {
             HttpSession session=request.getSession();
             session.setAttribute("userId",user.getId());
             System.out.println("Login Success!");
-            request.getRequestDispatcher("/servlet/getMessage").forward(request,response);
+            request.getRequestDispatcher("/servlet/getOrganizationEntry_employee").forward(request,response);
         }else{
             request.setAttribute("MESSAGE","incorrect_username_password");
             request.setAttribute("username",request.getParameter("username"));

@@ -8,6 +8,14 @@
         <servlet-class>LoginProcess</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>getOrganization_employee</servlet-name>
+        <servlet-class>GetOrganization_Employee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getOrganizationEntry_employee</servlet-name>
+        <servlet-class>GetOrganizationEntry_Employee</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SendMessage</servlet-name>
         <servlet-class>SendMessage</servlet-class>
     </servlet>
@@ -34,6 +42,14 @@
     <servlet-mapping>
         <servlet-name>getMessageInbox</servlet-name>
         <url-pattern>/servlet/getMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getOrganization_employee</servlet-name>
+        <url-pattern>/servlet/getOrganization_employee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getOrganizationEntry_employee</servlet-name>
+        <url-pattern>/servlet/getOrganizationEntry_employee</url-pattern>
     </servlet-mapping>
 
     <resource-ref>
