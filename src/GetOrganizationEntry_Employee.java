@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * Created by martin on 5/18/17.
@@ -11,7 +12,9 @@ import java.io.IOException;
 public class GetOrganizationEntry_Employee extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
         System.out.println("enter get orga entry do get");
-        request.setAttribute("organizationId","null");
+        Stack<String> organizationIDStack=new Stack<String>();
+        organizationIDStack.push("null");
+        request.getSession().setAttribute("organizationStack",organizationIDStack);
         request.getRequestDispatcher("/servlet/getOrganization_employee").forward(request,response);
 
     }

@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="entity.Organization" table="ORGANIZATION">
+    <class name="entity.Organization" table="ORGANIZATION" >
         <id name="id" column="ID">
             <generator class="guid"></generator>
         </id>
@@ -15,24 +15,24 @@
             <one-to-many class="entity.Organization"></one-to-many>
         </set>
         <many-to-one name="parentOrganization" column="ORGANIZATION_ID" class="entity.Organization"></many-to-one>
-        <set name="employees" cascade="all" >
+        <set name="employees" cascade="all" lazy="false">
             <key column="ORGANIZATION_ID"/>
             <one-to-many class="entity.Employee"/>
         </set>
-        <set name="newsLibraries" cascade="all">
+        <set name="newsLibraries" cascade="all" >
             <key column="ORGANIZATION_ID"/>
             <one-to-many class="entity.News"/>
         </set>
-        <set name="documentLibraries" cascade="all">
+        <set name="documentLibraries" cascade="all" >
             <key column="ORGANIZATION_ID"/>
             <one-to-many class="entity.DocumentLibrary"/>
         </set>
-        <set name="announcements" cascade="all">
+        <set name="announcements" cascade="all" >
             <key column="ORGANIZATION_ID"/>
             <one-to-many class="entity.Announcement"/>
         </set>
 
-        <map name="privilegeManager" cascade="all">
+        <map name="privilegeManager" cascade="all" >
             <key column="ORGANIZATION_ID"/>
             <map-key type="int" column="ADMIN_ID"/>
             <one-to-many class="entity.Privilege"/>

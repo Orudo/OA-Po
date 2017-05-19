@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by martin on 5/18/17.
@@ -19,19 +20,26 @@ import java.util.List;
 public class GetOrganization_Employee extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
         System.out.println("enter get orga");
+
         //System.out.println(request.getAttribute("organizationId").toString());
-        String parid;
+        Stack<String> organizationStack=(Stack<String>)request.getSession().getAttribute("organizationStack");
         try{
-           parid=request.getAttribute("organizationId").toString();
-        }catch (Exception e){parid=request.getParameter("organizationId").toString();}
+            String id=request.getParameter("remove").toString();
+            organizationStack.pop();
+
+        }catch (Exception e){}
+        try{
+            String id=request.getParameter("organizationId").toString();
+            organizationStack.push(id);
+
+        }catch (Exception e){}
+        String currentid=organizationStack.peek();
         //==null?request.getParameter("organizationId".toString()):request.getAttribute("organizationId").toString()
-        List<Organization> organizations=Organization.findOrganizationByParentId(parid);
+        List<Organization> organizations=Organization.findOrganizationByParentId(currentid);
         request.setAttribute("organizations",organizations);
-        Organization org=Organization.getOrganizationById(parid);
-        System.out.println(org==null);
+        Organization org=Organization.getOrganizationById(currentid);
         request.setAttribute("currentOrganization",org);
-        if(org!=null){ System.out.println(org.getEmployees());request.setAttribute("organizationEmployees",org.getEmployees());}
-        System.out.println("goto another manager");
+        request.getSession().setAttribute("organizationStack",organizationStack);
         request.getRequestDispatcher("/startbootstrap-sb-admin-2-gh-pages/pages/EmployeeManager.jsp").forward(request,response);
     }
 }

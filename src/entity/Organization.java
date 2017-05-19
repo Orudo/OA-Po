@@ -64,7 +64,8 @@ public class Organization {
     {
 
 
-        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
+        Session session = factory.getCurrentSession();
+        Transaction t=session.beginTransaction();
         Query query;
         if(id.equals("null"))
         {
@@ -73,16 +74,17 @@ public class Organization {
 
         List<Organization> organizations=query.list();
 
-        Transaction t=session.beginTransaction();
+
         t.commit();
-        session.close();
+
 
         return organizations;
     }
     public static Organization getOrganizationById(String id)
     {
         System.out.println(id);
-        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
+        Session session = factory.getCurrentSession();
+        Transaction t=session.beginTransaction();
         Query query;
         if(id.equals("null"))
         {
@@ -91,9 +93,9 @@ public class Organization {
 
         List<Organization> users=query.list();
 
-        Transaction t=session.beginTransaction();
+
         t.commit();
-        session.close();
+
 
         Iterator<Organization> iter=users.iterator();
         if(iter.hasNext()) return iter.next();
@@ -102,6 +104,7 @@ public class Organization {
     public void AttachEmployee(Employee employee) {
         this.employees.add(employee);
     }
+
 
     public void AttachNewsLibrary(NewsLibrary lib) {
         newsLibraries.add(lib);

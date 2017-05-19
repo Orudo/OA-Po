@@ -320,7 +320,14 @@
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Sub Organizations<span class="fa arrow"></span></a>
+
                         <ul class="nav nav-second-level">
+
+                            <c:if test="${organizationStack.size()>1}">
+                                <li>
+                                    <a href="/servlet/getOrganization_employee?remove=true">back</a>
+                                </li>
+                            </c:if>
                             <c:forEach items="${organizations}" var="organization">
                                 <li>
                                     <a href="/servlet/getOrganization_employee?organizationId=${organization.getId()}"><c:out value="${organization.getName()}"/></a>
@@ -410,7 +417,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${organizationEmployees}" var="employee">
+                            <c:forEach items="${currentOrganization.getEmployees()}" var="employee">
                                 <tr class="clickable-row" data-href="/servlet/getEmployee?employeeid=${employee.getId()}">
                                     <td><c:out value="${employee.getName()}"/> </td>
                                     <td><c:out value="${employee.getDepartment()}"/></td>
@@ -468,7 +475,6 @@
             responsive: true
         });
     });
-    jQuery(document).ready(function(){ alert("Hello"); })
     jQuery(document).ready(function($) {
         $(".clickable-row").click(function() {
             window.document.location = $(this).data("href");
@@ -479,6 +485,7 @@
             window.document.location = $(this).data("href");
         });
     });
+
 </script>
 
 </body>

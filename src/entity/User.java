@@ -25,16 +25,14 @@ public class User {
     public static User getUser(String userName)
     {
 
-        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
-
+        Session session = factory.getCurrentSession();
+        Transaction t=session.beginTransaction();
         Query query=session.createQuery("from User where userName = '" +userName+"'");
 
         List<User> users=query.list();
 
 
-        Transaction t=session.beginTransaction();
-        t.commit();
-        session.close();
+
         System.out.println("Users list get");
 
         Iterator<User> iter=users.iterator();
@@ -43,15 +41,15 @@ public class User {
     }
     public static User getUserById(String id)
     {
-        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
-
+        Session session = factory.getCurrentSession();
+        Transaction t=session.beginTransaction();
         Query query=session.createQuery("from User where id = '" +id+"'");
 
         List<User> users=query.list();
 
-        Transaction t=session.beginTransaction();
-        t.commit();
-        session.close();
+
+
+
 
         Iterator<User> iter=users.iterator();
         if(iter.hasNext()) return iter.next();
