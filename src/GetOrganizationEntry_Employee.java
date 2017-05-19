@@ -11,7 +11,7 @@ import java.io.IOException;
 public class GetOrganizationEntry_Employee extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
         System.out.println("enter get orga entry do get");
-        request.setAttribute("parentOrganization","null");
+        request.setAttribute("organizationId","null");
         request.getRequestDispatcher("/servlet/getOrganization_employee").forward(request,response);
 
     }

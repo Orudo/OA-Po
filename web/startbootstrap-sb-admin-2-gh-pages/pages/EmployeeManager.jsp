@@ -319,31 +319,13 @@
                         <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Sub Organizations<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <c:forEach items="${organizations}" var="organization">
                                 <li>
-                                    <a href="/servlet/getEmployee?organizationId=${organization.getId()}"><c:out value="${organization.getName()}"/></a>
+                                    <a href="/servlet/getOrganization_employee?organizationId=${organization.getId()}"><c:out value="${organization.getName()}"/></a>
                                 </li>
                             </c:forEach>
-                            <li>
-                                <a href="panels-wells.html">Panels and Wells</a>
-                            </li>
-                            <li>
-                                <a href="buttons.html">Buttons</a>
-                            </li>
-                            <li>
-                                <a href="notifications.html">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="typography.html">Typography</a>
-                            </li>
-                            <li>
-                                <a href="icons.html"> Icons</a>
-                            </li>
-                            <li>
-                                <a href="grid.html">Grid</a>
-                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -421,18 +403,18 @@
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
-                                <th >Sender</th>
-                                <th >Date</th>
-                                <th >Content</th>
+                                <th >Name</th>
+                                <th >Department</th>
+                                <th >Phone</th>
 
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${messageLists}" var="message">
-                                <tr class="clickable-row" data-href="/servlet/getMessageDetail?messageid=${message.getId()}">
-                                    <td><c:out value="${message.getSender()}"/> </td>
-                                    <td><c:out value="${message.getSentdate()}"/></td>
-                                    <td ><c:out value="${message.getFilePath()}"/></td>
+                            <c:forEach items="${organizationEmployees}" var="employee">
+                                <tr class="clickable-row" data-href="/servlet/getEmployee?employeeid=${employee.getId()}">
+                                    <td><c:out value="${employee.getName()}"/> </td>
+                                    <td><c:out value="${employee.getDepartment()}"/></td>
+                                    <td ><c:out value="${employee.getPhone()}"/></td>
                                 </tr>
                             </c:forEach>
 

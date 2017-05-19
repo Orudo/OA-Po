@@ -33,12 +33,14 @@ public class Employee extends User {
     String photoPath;
     private  Organization organization;
     private static SessionFactory factory=new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
-    public static void addEmployee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
+    public static Employee addEmployee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
         Session session = factory.openSession();
         Transaction t=session.beginTransaction();
-        session.persist(new Employee(userName,passwd,name,department,title,phone,landlinePhone,email,photoPath));
+        Employee employee=new Employee(userName,passwd,name,department,title,phone,landlinePhone,email,photoPath);
+        session.persist(employee);
         t.commit();
         session.close();
+        return employee;
     }
     public Employee(){}
     public Employee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){

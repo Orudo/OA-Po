@@ -30,7 +30,14 @@ public class Organization {
 
 
 
-    public Organization(){}
+    public Organization(){
+        privilegeManager=new  HashMap<Integer, Privilege>();
+        employees=new HashSet<Employee>();
+        newsLibraries=new HashSet<NewsLibrary>();
+        documentLibraries=new HashSet<DocumentLibrary>();
+        announcements=new  HashSet<Announcement>();
+        subOrganizations=new HashSet<Organization>();
+    }
     public Organization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber){
         this.name=name;
         this.Code=Code;
@@ -43,6 +50,7 @@ public class Organization {
         newsLibraries=new HashSet<NewsLibrary>();
         documentLibraries=new HashSet<DocumentLibrary>();
         announcements=new  HashSet<Announcement>();
+        subOrganizations=new HashSet<Organization>();
     }
     public static Organization addOrganization(String name, String Code, String Rank, float registerFund, String leader, String faxNumber) {
         Session session = factory.getCurrentSession();
@@ -54,12 +62,14 @@ public class Organization {
     }
     public static List<Organization> findOrganizationByParentId(String id)
     {
+
+
         Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
         Query query;
-        if(id.equals(null))
+        if(id.equals("null"))
         {
-            query=session.createQuery("from Organization where parentOrganization = null ");
-        }else query=session.createQuery("from Organization where parentOrganization = '"+id+"' ");
+            query=session.createQuery("from Organization where parentOrganization.id = null ");
+        }else query=session.createQuery("from Organization where parentOrganization.id = '"+id+"' ");
 
         List<Organization> organizations=query.list();
 
@@ -68,6 +78,26 @@ public class Organization {
         session.close();
 
         return organizations;
+    }
+    public static Organization getOrganizationById(String id)
+    {
+        System.out.println(id);
+        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
+        Query query;
+        if(id.equals("null"))
+        {
+            query=session.createQuery("from Organization where id = null ");
+        }else query=session.createQuery("from Organization where id = '"+id+"' ");
+
+        List<Organization> users=query.list();
+
+        Transaction t=session.beginTransaction();
+        t.commit();
+        session.close();
+
+        Iterator<Organization> iter=users.iterator();
+        if(iter.hasNext()) return iter.next();
+        else return null;
     }
     public void AttachEmployee(Employee employee) {
         this.employees.add(employee);
@@ -92,6 +122,13 @@ public class Organization {
 
     public void DeatchDocumentLibrary(DocumentLibrary lib) {
         documentLibraries.remove(lib);
+    }
+    public void AttachSubOrganization(Organization organization)
+    {
+        System.out.println(organization);
+        System.out.print(subOrganizations);
+        subOrganizations.add(organization);
+        organization.parentOrganization=this;
     }
     public void DeatchAnnouncement(Announcement announcement) {
         announcements.remove(announcement);
