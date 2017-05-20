@@ -34,12 +34,12 @@ public class Employee extends User {
     private  Organization organization;
     private static SessionFactory factory=new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
     public static Employee addEmployee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
-        Session session = factory.openSession();
+        System.out.println("add Employee");
+        Session session = factory.getCurrentSession();
         Transaction t=session.beginTransaction();
         Employee employee=new Employee(userName,passwd,name,department,title,phone,landlinePhone,email,photoPath);
         session.persist(employee);
         t.commit();
-        session.close();
         return employee;
     }
     public Employee(){}
@@ -77,7 +77,7 @@ public class Employee extends User {
     }
     public static Employee getEmployeeByName(String userName)
     {
-        Session session = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
+        Session session = factory.getCurrentSession();//new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory().openSession();
 
         Query query=session.createQuery("from User where userName = '" +userName+"'");
 
@@ -85,7 +85,7 @@ public class Employee extends User {
 
         Transaction t=session.beginTransaction();
         t.commit();
-        session.close();
+
 
         Iterator<Employee> iter=users.iterator();
         if(iter.hasNext()) return iter.next();

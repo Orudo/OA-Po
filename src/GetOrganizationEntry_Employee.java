@@ -14,6 +14,7 @@ public class GetOrganizationEntry_Employee extends HttpServlet{
         System.out.println("enter get orga entry do get");
         Stack<String> organizationIDStack=new Stack<String>();
         organizationIDStack.push("null");
+        request.getSession().removeAttribute("organizationStack");
         request.getSession().setAttribute("organizationStack",organizationIDStack);
         request.getRequestDispatcher("/servlet/getOrganization_employee").forward(request,response);
 

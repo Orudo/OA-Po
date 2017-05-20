@@ -8,6 +8,10 @@
         <servlet-class>LoginProcess</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>addEmployee</servlet-name>
+        <servlet-class>addEmployee</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>getOrganization_employee</servlet-name>
         <servlet-class>GetOrganization_Employee</servlet-class>
     </servlet>
@@ -51,6 +55,10 @@
         <servlet-name>getOrganizationEntry_employee</servlet-name>
         <url-pattern>/servlet/getOrganizationEntry_employee</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>addEmployee</servlet-name>
+    <url-pattern>/servlet/addEmployee</url-pattern>
+</servlet-mapping>
 
     <resource-ref>
         <description>DB Connection</description>
