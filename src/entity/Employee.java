@@ -36,10 +36,11 @@ public class Employee extends User {
     public static Employee addEmployee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
         System.out.println("add Employee");
         Session session = factory.getCurrentSession();
-        Transaction t=session.beginTransaction();
+        //Transaction t=session.beginTransaction();
         Employee employee=new Employee(userName,passwd,name,department,title,phone,landlinePhone,email,photoPath);
         session.persist(employee);
-        t.commit();
+        session.getTransaction().commit();
+        //t.commit();
         return employee;
     }
     public Employee(){}
@@ -74,6 +75,21 @@ public class Employee extends User {
         if(isSetOrganization){
             organization.getEmployees().add(this);
         }
+    }
+    public static void updateEmployeeById(String id,String userName,String password,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
+        Session session=factory.getCurrentSession();
+        session.beginTransaction();
+        Employee origin=session.get(Employee.class,id);
+        origin.setUserName(userName);
+        origin.setPasswd(password);
+        origin.setName(name);
+        origin.setDepartment(department);
+        origin.setTitle(title);
+        origin.setPhone(phone);
+        origin.setLandlinePhone(landlinePhone);
+        origin.setEmail(email);
+        session.update(origin);
+        session.getTransaction().commit();
     }
     public static Employee getEmployeeByName(String userName)
     {

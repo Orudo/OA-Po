@@ -427,22 +427,37 @@
                                     <h4 class="modal-title">Modal Header</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/servlet/loginprocess" method="get">
+                                    <form action="/servlet/addEmployee" method="get">
                                         <fieldset>
-                                            <div class="form-group">
-                                                <label for="usrname">Email address</label>
-                                                <input type="text" class="form-control"
-                                                       id="usrname" placeholder="usrname"/>
+                                            <div class="form-group has-feedback" >
+                                                <input id="modal-orgid" class="form-control" placeholder="Username" name="orgid" type="text" autofocus>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="pwd">Password</label>
-                                                <input type="password" class="form-control"
-                                                       id="pwd" placeholder="Password"/>
+                                            <div class="form-group has-feedback" hidden="true">
+                                                <input id="modal-id" class="form-control" placeholder="Username" name="id" type="text" autofocus>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="title">Password</label>
-                                                <input type="password" class="form-control"
-                                                       id="title" placeholder="title"/>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-username" class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-password" class="form-control" placeholder="Username" name="password" type="text">
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-name" class="form-control" placeholder="Username" name="name" type="text">
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-department" class="form-control" placeholder="Username" name="department" type="text">
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-phone" class="form-control" placeholder="Password" name="phone" type="text"  >                              >
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-title" class="form-control" placeholder="Title" name="title" type="text">                          >
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-email" class="form-control" placeholder="Title" name="email" type="text">                          >
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <input id="modal-landlinephone" class="form-control" placeholder="Title" name="landlinephone" type="text">                          >
                                             </div>
                                             <%--<%=request.getAttribute("incorrect_username_password")%>--%>
                                             <!-- Change this to a button or input when using this as a form -->
@@ -586,7 +601,7 @@
                 sortable: false,                     //是否启用排序
                 sortOrder: "asc",                   //排序方式
                 //queryParams: oTableInit.queryParams,//传递参数（*）
-                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber:1,                       //初始化加载第一页，默认第一页
                 pageSize: 10,                       //每页的记录行数（*）
                 pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
@@ -604,25 +619,51 @@
                 columns: [{
                     checkbox: true
                 }, {
+                    field:'Id',
+                    title:'Id'
+                },{
+                    field:'userName',
+                    title:'username'
+                },{
+                    field:'password',
+                    title:'password'
+                },{
+                    field:'phone',
+                    title:'phone'
+                },{
+                    field:'landlinephone',
+                    title:'landlinePhone'
+                },{
+                    field:'email',
+                    title:'email'
+                },
+
+
+                    {
                     field: 'Name',
                     title: 'Name'
                 }, {
-                    field: 'ParentName',
-                    title: 'ParentName'
+                    field: 'Department',
+                    title: 'Department'
                 }, {
                     field: 'Level',
                     title: 'Level'
-                }, {
-                    field: 'Desc',
-                    title: 'Desc'
                 }],
                 data:[
+                    <c:forEach items="${currentOrganization.getEmployees()}" var="employee">
                     {
-                        Name:'damin',
-                        ParentName:'ss',
-                        Level:'level',
-                        Desc:'damnit'
-                    }
+                        Id:'${employee.getId()}',
+                        userName:'${employee.getUserName()}',
+                        password:'${employee.getPasswd()}',
+                        landlinephone:'${employee.getLandlinePhone()}',
+                        email:'${employee.getEmail()}',
+                        Name:'${employee.getName()}',
+                        Department:'${employee.getDepartment()}',
+                        Level:'${employee.getTitle()}',
+                        phone:'${employee.getPhone()}'
+                    },
+                    </c:forEach>
+
                 ]
             });
         };
@@ -647,13 +688,34 @@
 
         oInit.Init = function () {
             //初始化页面上面的按钮事件
-            $("#btn_edit").click(function(){
+            $("#btn_add").click(function(){
+                $('#modal-orgid').val("${currentOrganization.getId()}");
                 $("#myModal").modal();
+            })
+            $("#btn_edit").click(function(){
+                editInfo(($("#tb_departments").bootstrapTable('getAllSelections'))[0]);
+                $("#myModal").modal();
+
             })
         };
 
         return oInit;
     };
+    function editInfo(obj) {
+
+        //获取表格中的一行数据
+
+        //向模态框中传值
+        $('#modal-username').val(obj.userName);
+        $('#modal-password').val(obj.password);
+        $('#modal-name').val(obj.Name);
+        $('#modal-id').val(obj.Id);
+        $('#modal-department').val(obj.departmentname);
+        $('#modal-phone').val(obj.phone);
+        $('#modal-title').val(obj.title);
+        $('#modal-email').val(obj.email);
+        $('#modal-landlinephone').val(obj.landlinephone);
+    }
 
 
 
