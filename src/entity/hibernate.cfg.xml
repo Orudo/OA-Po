@@ -27,6 +27,7 @@
 
         <!-- List of XML mapping files -->
         <mapping resource="entity/User.hbm.xml"/>
+        <mapping resource="entity/UserGroup.hbm.xml"/>
         <mapping resource="entity/Organization.hbm.xml"/>
         <mapping resource="entity/Privilege.hbm.xml"/>
         <mapping resource="entity/News.hbm.xml"/>

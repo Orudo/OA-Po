@@ -16,7 +16,11 @@ import java.rmi.server.ExportException;
  */
 public class addEmployee extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try{
+            Organization org= Organization.getOrganizationById(request.getParameter("orgid").toString());
+            if(!org.CheckPrivilegeForCreating(request.getSession().getAttribute("userId").toString())||!org.CheckPrivilegeForCreating(request.getSession().getAttribute("userId").toString()))
+                return;
             Employee.updateEmployeeById(request.getParameter("id").toString(),request.getParameter("username").toString(),
                     request.getParameter("password").toString(),request.getParameter("name").toString(),request.getParameter("department".toString()),
                     request.getParameter("title").toString(),request.getParameter("phone").toString(),request.getParameter("landlinephone").toString(),
@@ -25,6 +29,8 @@ public class addEmployee extends HttpServlet {
         }
         try{
             Organization org= Organization.getOrganizationById(request.getParameter("orgid").toString());
+            if(!org.CheckPrivilegeForCreating(request.getSession().getAttribute("userId").toString()))
+                return;
             Employee emp=Employee.addEmployee(request.getParameter("username").toString(),
                     request.getParameter("password").toString(),request.getParameter("name").toString(),request.getParameter("department".toString()),
                     request.getParameter("title").toString(),request.getParameter("phone").toString(),request.getParameter("landlinephone").toString(),

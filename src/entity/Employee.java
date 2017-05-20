@@ -36,12 +36,25 @@ public class Employee extends User {
     public static Employee addEmployee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
         System.out.println("add Employee");
         Session session = factory.getCurrentSession();
-        //Transaction t=session.beginTransaction();
+        Transaction t=session.beginTransaction();
         Employee employee=new Employee(userName,passwd,name,department,title,phone,landlinePhone,email,photoPath);
         session.persist(employee);
         session.getTransaction().commit();
         //t.commit();
         return employee;
+    }
+    public Employee(Employee e)
+    {
+        this.id=e.id;
+        this.userName=e.getUserName();
+        this.passwd=e.getPasswd();
+        this.Name=e.getName();
+        this.department=e.getDepartment();
+        this.title=e.getTitle();
+        this.phone=e.phone;
+        this.landlinePhone=e.landlinePhone;
+        this.email=e.email;
+
     }
     public Employee(){}
     public Employee(String userName,String passwd,String name,String department,String title,String phone,String  landlinePhone,String email,String photoPath){
@@ -112,8 +125,9 @@ public class Employee extends User {
     public static void DelEmployeeById(String id)
     {
         Session session=factory.getCurrentSession();
-        Employee employee=session.load(Employee.class,id);
         session.beginTransaction();
+        Employee employee=session.load(Employee.class,id);
+
         session.delete(employee);
         session.getTransaction().commit();
     }

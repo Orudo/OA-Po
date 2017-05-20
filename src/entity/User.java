@@ -9,8 +9,10 @@ import org.hibernate.query.Query;
 
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by martin on 17-4-24.
@@ -19,6 +21,7 @@ public class User {
     String id;
     String userName;
     String passwd;
+    Set<UserGroup> myUserGroup;
     private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
 
@@ -39,6 +42,7 @@ public class User {
         if(iter.hasNext()) return iter.next();
         else return null;
     }
+
     public static User getUserById(String id)
     {
         Session session = factory.getCurrentSession();
@@ -55,11 +59,13 @@ public class User {
         if(iter.hasNext()) return iter.next();
         else return null;
     }
-    public User(){}
+    public User(){this.myUserGroup=new HashSet<UserGroup>();}
     public User(String userName,String passwd)
     {
+
         this.passwd=Hashing.sha256().hashString(passwd, StandardCharsets.UTF_8).toString();
         this.userName=userName;
+        this.myUserGroup=new HashSet<UserGroup>();
     }
     public static void addNewUser(String userName,String passwd)
     {
@@ -91,5 +97,19 @@ public class User {
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+
+    public Set<UserGroup> getMyUserGroup() {
+        return myUserGroup;
+    }
+    public void UpdateMyself()
+    {
+        Session session=factory.getCurrentSession();
+        session.update(this);
+        session.getTransaction().commit();
+    }
+
+    public void setMyUserGroup(Set<UserGroup> myUserGroup) {
+        this.myUserGroup = myUserGroup;
     }
 }

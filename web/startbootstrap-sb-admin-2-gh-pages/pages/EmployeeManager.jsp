@@ -33,10 +33,10 @@
     <!-- Bootstrap Core CSS -->
     <link href="/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
 
     <!-- Latest compiled and minified Locales -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -403,7 +403,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Tables</h1>
+                <h1 class="page-header">Employee Manager</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -411,9 +411,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        DataTables Advanced Tables
-                    </div>
 
                     <!--modal-->
 
@@ -429,35 +426,35 @@
                                 <div class="modal-body">
                                     <form action="/servlet/addEmployee" method="get">
                                         <fieldset>
-                                            <div class="form-group has-feedback" >
-                                                <input id="modal-orgid" class="form-control" placeholder="Username" name="orgid" type="text" autofocus>
+                                            <div class="form-group has-feedback" hidden="true">
+                                                <input id="modal-orgid" class="form-control" placeholder="organizationid" name="orgid" type="text" >
                                             </div>
                                             <div class="form-group has-feedback" hidden="true">
-                                                <input id="modal-id" class="form-control" placeholder="Username" name="id" type="text" autofocus>
+                                                <input id="modal-id" class="form-control" placeholder="Username" name="id" type="text">
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <input id="modal-username" class="form-control" placeholder="Username" name="username" type="text" autofocus>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-password" class="form-control" placeholder="Username" name="password" type="text">
+                                                <input id="modal-password" class="form-control" placeholder="password" name="password" type="text">
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-name" class="form-control" placeholder="Username" name="name" type="text">
+                                                <input id="modal-name" class="form-control" placeholder="Employee Name" name="name" type="text">
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-department" class="form-control" placeholder="Username" name="department" type="text">
+                                                <input id="modal-department" class="form-control" placeholder="Department" name="department" type="text">
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-phone" class="form-control" placeholder="Password" name="phone" type="text"  >                              >
+                                                <input id="modal-phone" class="form-control" placeholder="Phone" name="phone" type="text"  >
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-title" class="form-control" placeholder="Title" name="title" type="text">                          >
+                                                <input id="modal-title" class="form-control" placeholder="Title" name="title" type="text">
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-email" class="form-control" placeholder="Title" name="email" type="text">                          >
+                                                <input id="modal-email" class="form-control" placeholder="Email" name="email" type="email">
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <input id="modal-landlinephone" class="form-control" placeholder="Title" name="landlinephone" type="text">                          >
+                                                <input id="modal-landlinephone" class="form-control" placeholder="Landline Phone" name="landlinephone" type="text">
                                             </div>
                                             <%--<%=request.getAttribute("incorrect_username_password")%>--%>
                                             <!-- Change this to a button or input when using this as a form -->
@@ -592,16 +589,21 @@
         //初始化Table
         oTableInit.Init = function () {
             $('#tb_departments').bootstrapTable({
-                //url: '/Home/GetDepartment',         //请求后台的URL（*）
-                method: 'get',                      //请求方式（*）
+                url: '/servlet/getEmployee',         //请求后台的URL（*）
+                method: 'get',
                 toolbar: '#toolbar',                //工具按钮用哪个容器
                 striped: true,                      //是否显示行间隔色
                 cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
                 pagination: true,                   //是否显示分页（*）
-                sortable: false,                     //是否启用排序
+                sortable: true,                     //是否启用排序
                 sortOrder: "asc",                   //排序方式
-                //queryParams: oTableInit.queryParams,//传递参数（*）
                 sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                queryParams: function queryParams(params) {   //设置查询参数
+                    var param = {
+                        id:'${currentOrganizationId}'
+                    };
+                    return param;
+                },
                 pageNumber:1,                       //初始化加载第一页，默认第一页
                 pageSize: 10,                       //每页的记录行数（*）
                 pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
@@ -612,69 +614,48 @@
                 minimumCountColumns: 2,             //最少允许的列数
                 clickToSelect: true,                //是否启用点击选中行
                 height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-                uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                uniqueId: "Id",                     //每一行的唯一标识，一般为主键列
                 showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                   //是否显示父子表
                 columns: [{
                     checkbox: true
                 }, {
-                    field:'Id',
-                    title:'Id'
+                    field:'id',
+                    title:'id'
                 },{
                     field:'userName',
                     title:'username'
                 },{
-                    field:'password',
+                    field:'passwd',
                     title:'password'
                 },{
                     field:'phone',
                     title:'phone'
                 },{
-                    field:'landlinephone',
+                    field:'landlinePhone',
                     title:'landlinePhone'
                 },{
                     field:'email',
                     title:'email'
-                },
-
-
-                    {
+                },{
                     field: 'Name',
                     title: 'Name'
                 }, {
-                    field: 'Department',
-                    title: 'Department'
+                    field: 'department',
+                    title: 'department'
                 }, {
-                    field: 'Level',
-                    title: 'Level'
-                }],
-                data:[
-                    <c:forEach items="${currentOrganization.getEmployees()}" var="employee">
-                    {
-                        Id:'${employee.getId()}',
-                        userName:'${employee.getUserName()}',
-                        password:'${employee.getPasswd()}',
-                        landlinephone:'${employee.getLandlinePhone()}',
-                        email:'${employee.getEmail()}',
-                        Name:'${employee.getName()}',
-                        Department:'${employee.getDepartment()}',
-                        Level:'${employee.getTitle()}',
-                        phone:'${employee.getPhone()}'
-                    },
-                    </c:forEach>
-
-                ]
+                    field: 'title',
+                    title: 'title'
+                }]
             });
+            $('#tb_departments').bootstrapTable('hideColumn','id');
         };
 
         //得到查询的参数
         oTableInit.queryParams = function (params) {
             var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-                limit: params.limit,   //页面大小
-                offset: params.offset,  //页码
-                departmentname: $("#txt_search_departmentname").val(),
-                statu: $("#txt_search_statu").val()
+                id:'${currentOrganizationId}'
             };
             return temp;
         };
@@ -697,24 +678,72 @@
                 $("#myModal").modal();
 
             })
+            $("#btn_delete").click(function(){
+                validateUserId(($("#tb_departments").bootstrapTable('getAllSelections'))[0]);
+                alert("btn-click click");
+            })
+
         };
 
         return oInit;
     };
+    function validateUserId(obj) {
+        ajaxFunction();
+
+        // Here processRequest() is the callback function.
+        ajaxRequest.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location.reload();
+            }
+        };
+
+        //if (!target) target = document.getElementById("userid");
+        alert(obj.Id);
+        var url = "delEmployee?id="+ obj.id;
+
+        ajaxRequest.open("GET", url, true);
+        ajaxRequest.send(null);
+    }
     function editInfo(obj) {
 
         //获取表格中的一行数据
 
         //向模态框中传值
         $('#modal-username').val(obj.userName);
-        $('#modal-password').val(obj.password);
         $('#modal-name').val(obj.Name);
-        $('#modal-id').val(obj.Id);
-        $('#modal-department').val(obj.departmentname);
+        $('#modal-id').val(obj.id);
+        $('#modal-department').val(obj.department);
         $('#modal-phone').val(obj.phone);
         $('#modal-title').val(obj.title);
         $('#modal-email').val(obj.email);
-        $('#modal-landlinephone').val(obj.landlinephone);
+        $('#modal-landlinephone').val(obj.landlinePhone);
+    }
+
+
+
+    var ajaxRequest;  // The variable that makes Ajax possible!
+    function ajaxFunction(){
+        try{
+
+            // Opera 8.0+, Firefox, Safari
+            ajaxRequest = new XMLHttpRequest();
+        }catch (e){
+
+            // Internet Explorer Browsers
+            try{
+                ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+            }catch (e) {
+
+                try{
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                }catch (e){
+
+                    // Something went wrong
+                    alert("Your browser broke!");
+                    return false;
+                }
+            }
+        }
     }
 
 

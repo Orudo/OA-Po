@@ -5,6 +5,15 @@
         </id>
         <property name="userName" column="USERNAME"/>
         <property name="passwd" column="PASSWD"/>
+        <set name="myUserGroup" table="USER_USERGROUP"
+             fetch="select" cascade="save-update" >
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="entity.UserGroup">
+                <column name="USERGROUP_ID" not-null="true" />
+            </many-to-many>
+        </set>
         <joined-subclass name="entity.Employee" table="EMPLOYEE">
             <key column="USER_ID"/>
             <many-to-one name="organization" column="ORGANIZATION_ID" class="entity.Organization"/>

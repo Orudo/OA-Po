@@ -32,5 +32,6 @@
     <orderEntry type="library" name="mysql-connector-java-5.1.41-bin" level="project" />
     <orderEntry type="library" name="javax.servlet-3.0.0.v201112011016" level="project" />
     <orderEntry type="library" name="guava-21.0" level="project" />
+    <orderEntry type="library" name="gson-2.8.0" level="project" />
   </component>
 </module>

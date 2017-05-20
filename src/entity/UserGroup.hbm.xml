@@ -4,9 +4,5 @@
             <generator class="guid"/>
         </id>
         <property name="description" column="DESCRIPTION"/>
-        <set name="users" cascade="all">
-            <key colmun="GROUP_ID"/>
-            <one-to-many class="entity.User"/>
-        </set>
     </class>
 </hibernate-mapping>

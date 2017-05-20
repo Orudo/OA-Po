@@ -1,8 +1,5 @@
 import com.google.common.hash.Hashing;
-import entity.Employee;
-import entity.Message;
-import entity.Organization;
-import entity.User;
+import entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -111,23 +108,13 @@ public class tester {
         message.setReceiver("admin");
         message.setFilePath("damnit");*/
 
-        //Employee.addEmployee("martin","123456","martin","damnit","master","131-0000-0000","192,--0029","a@qq.com","//");
-        Organization organization=Organization.addOrganization("test11","123-321","no rank",(float)321.4,"i","1230-3210");
-        System.out.println(organization);
-        Organization parorganization=Organization.addOrganization("test11_par","123-321","no rank",(float)321.4,"i","1230-3210");
-        System.out.println(parorganization);
-        parorganization.AttachSubOrganization(organization);
+        Employee.addEmployee("martin","123456","martin","damnit","master","131-0000-0000","192,--0029","a@qq.com","//");
+        //Privilege privilege=Privilege.createPrivilege(true);
+        //Organization org=Organization.findOrganizationByParentId("null").get(0);
+        //UserGroup userGroup=UserGroup.getUserGroupByDescription("administrator");
+        //org.AttachPrivilegeToId(userGroup.getId(),privilege);
+        //S/ystem.out.println("success");
 
-        Employee employee=Employee.addEmployee("orudo","123456","orudo","damnit","priciple","131-0000-0000","020-00998877","a@dd.com","no");
-        System.out.println(employee);
-        Employee par_employee=Employee.addEmployee("orudo_par","123456","orudo","damnit","priciple","131-0000-0000","020-00998877","a@dd.com","no");
-        par_employee.AttachToOrganization(parorganization,true);
-        System.out.println(employee);
-        employee.AttachToOrganization(organization,true);
-        employee.UpdateMyself();
-        par_employee.UpdateMyself();
-        organization.UpdateMyself();
-        parorganization.UpdateMyself();
 
 
 

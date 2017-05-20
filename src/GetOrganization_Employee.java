@@ -39,6 +39,7 @@ public class GetOrganization_Employee extends HttpServlet {
         request.setAttribute("organizations",organizations);
         Organization org=Organization.getOrganizationById(currentid);
         request.setAttribute("currentOrganization",org);
+        request.setAttribute("currentOrganizationId",org==null?"null":org.getId());
         request.getSession().setAttribute("organizationStack",organizationStack);
         request.getRequestDispatcher("/startbootstrap-sb-admin-2-gh-pages/pages/EmployeeManager.jsp").forward(request,response);
     }

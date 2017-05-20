@@ -1,5 +1,6 @@
 package entity;
 
+import enums.Privileges;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,7 +21,7 @@ public class Organization {
     float registerFund;
     String leader;
     String faxNumber;
-    Map<Integer, Privilege> privilegeManager;
+    Map<String, Privilege> privilegeManager;
     Set<Employee> employees;
     Set<Organization> subOrganizations;
     Set<NewsLibrary> newsLibraries;
@@ -28,10 +29,16 @@ public class Organization {
     Set<Announcement> announcements;
     private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
-
-
+    public boolean CheckPrivilegeForCreating(String id){
+        return privilegeManager.get(id).checkStatus(Privileges.owned);
+    }
+    public void AttachPrivilegeToId(String id,Privilege privilege)
+    {
+        privilegeManager.put(id,privilege);
+        UpdateMyself();
+    }
     public Organization(){
-        privilegeManager=new  HashMap<Integer, Privilege>();
+        privilegeManager=new  HashMap<String, Privilege>();
         employees=new HashSet<Employee>();
         newsLibraries=new HashSet<NewsLibrary>();
         documentLibraries=new HashSet<DocumentLibrary>();
@@ -45,7 +52,7 @@ public class Organization {
         this.registerFund=registerFund;
         this.leader=leader;
         this.faxNumber=faxNumber;
-        privilegeManager=new  HashMap<Integer, Privilege>();
+        privilegeManager=new  HashMap<String, Privilege>();
         employees=new HashSet<Employee>();
         newsLibraries=new HashSet<NewsLibrary>();
         documentLibraries=new HashSet<DocumentLibrary>();
@@ -260,11 +267,11 @@ public class Organization {
         this.faxNumber = faxNumber;
     }
 
-    public Map<Integer, Privilege> getPrivilegeManager() {
+    public Map<String, Privilege> getPrivilegeManager() {
         return privilegeManager;
     }
 
-    public void setPrivilegeManager(Map<Integer, Privilege> privilegeManager) {
+    public void setPrivilegeManager(Map<String, Privilege> privilegeManager) {
         this.privilegeManager = privilegeManager;
     }
 }

@@ -32,9 +32,9 @@
             <one-to-many class="entity.Announcement"/>
         </set>
 
-        <map name="privilegeManager" cascade="all" >
+        <map name="privilegeManager" cascade="all"  lazy="false">
             <key column="ORGANIZATION_ID"/>
-            <map-key type="int" column="ADMIN_ID"/>
+            <map-key type="java.lang.String" column="ADMIN_ID"/>
             <one-to-many class="entity.Privilege"/>
         </map>
     </class>

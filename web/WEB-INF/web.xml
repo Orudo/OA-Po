@@ -4,8 +4,16 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
+        <servlet-name>getEmployee</servlet-name>
+        <servlet-class>getEmployee</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>LoginProcess</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEmployee</servlet-name>
+        <servlet-class>DeleteEmployee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>addEmployee</servlet-name>
@@ -59,6 +67,14 @@
     <servlet-name>addEmployee</servlet-name>
     <url-pattern>/servlet/addEmployee</url-pattern>
 </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEmployee</servlet-name>
+        <url-pattern>/servlet/delEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getEmployee</servlet-name>
+        <url-pattern>/servlet/getEmployee</url-pattern>
+    </servlet-mapping>
 
     <resource-ref>
         <description>DB Connection</description>

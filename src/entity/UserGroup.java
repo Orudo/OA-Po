@@ -1,5 +1,13 @@
 package entity;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -7,9 +15,42 @@ import java.util.Set;
  */
 public class UserGroup {
     private String id;
-    private Set<User> users;
     private String description;
+    private static SessionFactory factory = new Configuration().configure("entity/hibernate.cfg.xml").buildSessionFactory();
 
+    public UserGroup(){}
+    public UserGroup(String description){this.description=description;}
+
+    public static UserGroup createUserGroup(String description){
+        Session session=factory.getCurrentSession();
+        session.beginTransaction();
+        UserGroup group=new UserGroup(description);
+        session.persist(group);
+        session.getTransaction().commit();
+        return group;
+
+    }
+    public static UserGroup getUserGroupByDescription(String description)
+    {
+        Session session = factory.getCurrentSession();
+        Transaction t=session.beginTransaction();
+        Query query=session.createQuery("from UserGroup where description = '" +description+"'");
+
+        List<UserGroup> users=query.list();
+
+
+
+
+
+        Iterator<UserGroup> iter=users.iterator();
+        if(iter.hasNext()) return iter.next();
+        else return null;
+
+    }
+    public void AttachUser(User user)
+    {
+        user.getMyUserGroup().add(this);
+    }
     public String getDescription() {
         return description;
     }
@@ -26,11 +67,5 @@ public class UserGroup {
         this.id = id;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }
